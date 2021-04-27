@@ -5,15 +5,16 @@ from django.views.decorators.csrf import csrf_exempt
 import numpy, json, redis, os
 from urllib.parse import urlparse
 
-url = urlparse(os.environ.get("REDIS_URL"))
-print(os.environ.get("REDIS_URL"))
+url = urlparse("redis://redistogo:d4323775a9c4ca398d9363c0d304e962@scat.redistogo.com:11835/")
 print(url)
 print('hostname', url.hostname)
 print('port', url.port)
+print(url.password)
 r = redis.Redis(
   host=url.hostname, 
   port=url.port,
-  decode_responses=True
+  decode_responses=True,
+  password=url.password
 )
 
 ra = RedisAdapter(r, 'stocks')
@@ -43,5 +44,5 @@ def todayData(request) :
     for d in numpy.array(data['data']) :
       ra.append(d)
     r.set('date', date)
-    print('done traveresiong')
+    print('done traversing')
   return HttpResponse('hello')
