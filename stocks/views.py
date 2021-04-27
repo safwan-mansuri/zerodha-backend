@@ -19,6 +19,7 @@ def stockDetails(request) :
   print('hello')
   data = ra.showAll()
   date = r.get('date')
+  print(data, date)
   response = {
     "statusCode": 200,
     "data": data,
@@ -29,6 +30,7 @@ def stockDetails(request) :
 
 @csrf_exempt
 def todayData(request) :
+  print('####################################')
   if request.method == 'POST' :
     ra.removeAll()
     r.delete('date')
