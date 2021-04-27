@@ -5,13 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import numpy, json, redis, os
 from urllib.parse import urlparse
 
-url = urlparse(os.environ.get("REDIS_URL"))
-print(url)
-r = redis.Redis(
-  host=url.hostname, 
-  port=url.port,
-  decode_responses=True
-)
+r = redis.from_url(os.environ.get("REDIS_URL"))
 
 ra = RedisAdapter(r, 'stocks')
 
