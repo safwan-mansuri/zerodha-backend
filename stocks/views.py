@@ -50,11 +50,18 @@ def todayData(request) :
       for d in numpy.array(data['data']) :
         ra.append(d)
       r.set('date', date)
+      logging.info('done added data into redis list ........')
+      response = {
+       "statusCode": 200,
+       "success": True
+      }
+      return JsonResponse(json.dumps(response), safe=False)
+
     response = {
-      "statusCode": 200,
-      "success": True
+      "message" : "data not available"
     }
     return JsonResponse(json.dumps(response), safe=False)
+
   except Exception as e:
     logging.error('Something bad happened', str(e))
     response = {
