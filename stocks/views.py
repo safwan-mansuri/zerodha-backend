@@ -3,11 +3,13 @@ from django.http import HttpResponse, JsonResponse
 from .adapter.redis_adapter import RedisAdapter
 from django.views.decorators.csrf import csrf_exempt
 import numpy, json, redis, os
+from urllib.parse import urlparse
 
 url = urlparse(os.environ.get("REDIS_URL"))
+print(url)
 r = redis.Redis(
   host=url.hostname, 
-  port=url.port, ß
+  port=url.port,
   decode_responses=True
 )
 
