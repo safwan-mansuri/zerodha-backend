@@ -4,11 +4,12 @@ from .adapter.redis_adapter import RedisAdapter
 from django.views.decorators.csrf import csrf_exempt
 import numpy, json, redis, os
 
-r = redis.Redis(host='redis', port=6379, decode_responses=True)
+r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
 ra = RedisAdapter(r, 'stocks')
 
 def stockDetails(request) :
+  print('hello')
   data = ra.showAll()
   date = r.get('date')
   response = {
