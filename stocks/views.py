@@ -6,7 +6,10 @@ import numpy, json, redis, os
 from urllib.parse import urlparse
 
 url = urlparse(os.environ.get("REDIS_URL"))
+print(os.environ.get("REDIS_URL"))
 print(url)
+print('hostname', url.hostname)
+print('port', url.port)
 r = redis.Redis(
   host=url.hostname, 
   port=url.port,
